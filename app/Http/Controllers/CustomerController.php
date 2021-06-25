@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Customer;
+use DB;
 
 class CustomerController extends Controller
 {
@@ -45,9 +46,11 @@ class CustomerController extends Controller
         $customer->bank_branch = $request->bank_branch;
         $customer->city = $request->city;
         //photo store
-        $extension = $request->photo->extension();
-        $photo_name = $customer->name.".".$extension;
-        $request->photo->storeAs('customer', $photo_name);
+        if ($request->hasFile('photo')) {
+            $photo = $request->file('photo');
+            $photo_name = date("Ymdhis") . '.' . $photo->getClientOriginalExtension();
+            $photo->move(public_path('Public/Image/Customer/Photo') , $photo_name);
+        }
         $customer->photo = $photo_name;
 
         $customer->save();
@@ -75,11 +78,9 @@ class CustomerController extends Controller
         return view('Customer.edit_customer',compact('customer'));
     }
     //update single employee
-    public function update(\App\Models\Customer   $customer_id ){
-
+    public function update(Request $request ){
         
-        
-        $data= request()->validate([
+        $request->validate([
             'name' => 'required',
             'email' => 'email|required',
             'phone' => 'required',
@@ -93,7 +94,42 @@ class CustomerController extends Controller
 
         ]);
 
-         $customer_id->update($data);
+        $id = $request->id;
+
+        $customer = Customer::findorfail($id);
+
+        $customer->name = $request->name;
+        $customer->email = $request->email;
+        $customer->phone = $request->phone;
+        $customer->address = $request->address;
+        $customer->shopname = $request->shopname;
+        $customer->account_holder = $request->account_holder;
+        $customer->account_number = $request->account_number;
+        $customer->bank_name = $request->bank_name;
+        $customer->bank_branch = $request->bank_branch;
+        $customer->city = $request->city;
+        //photo store
+        if ($request->hasFile('photo')) {
+
+            $m = DB::table('customers')->where('id', $id)->first();
+            $old_imge = $m->photo;
+            if(file_exists($old_imge)){
+                unlink(public_path('Public/Image/Customer/Photo').'/'.$customer->photo);
+            }
+    
+            $photo = $request->file('photo');
+            $photo_name = date("Ymdhis") . '.' . $photo->getClientOriginalExtension();
+            $photo->move(public_path('public/Image/Customer/Photo') , $photo_name);
+            $customer->photo = $photo_name;
+    
+        }else{
+                $m = DB::table('customers')->where('id', $id)->first();
+                $old_imge = $m->photo;
+                $customer->photo = $old_imge;
+    
+            }
+
+        $customer->save();
         
         return redirect()->route('customer.index');
 

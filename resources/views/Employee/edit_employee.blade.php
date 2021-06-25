@@ -23,8 +23,9 @@
                 <div class="panel panel-default">
                     <div class="panel-heading"><h3 class="panel-title">Edit Employee Details</h3></div>
                     <div class="panel-body">
-                        <form role="form" method="post" action="/employees/{{$employee->id}}" enctype="multipart/form-data">
+                        <form role="form" method="post" action="{{ route('employee.update')}}" enctype="multipart/form-data">
                             @csrf
+                            <input type="hidden" value="{{ $employee->id }}" name="id" class="form-control" >
                             <div class="form-group">
                                 <label for="name">Name</label>
                                 <input type="text" value="{{ $employee->name }}" name="name" class="form-control" id="name" placeholder="Enter Your Full Name">
@@ -89,8 +90,12 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="photo">Photo</label>
-                                <input type="text" value="{{ $employee->photo }}" name="photo" class="form-control" id="photo" >
+                                <label for="photo">Old Photo</label>
+                                <img src="{{asset('public/Image/Employee/Photo')}}/{{ $employee->photo }}" alt="Employee Image" width="500" height="400">
+                            </div>
+                            <div class="form-group">
+                                <label for="photo">Upload New Photo</label>
+                                <input type="file" name="photo" class="form-control" id="photo" >
                                 @error('photo')
                                     <strong class="alert alert-danger">{{ $message }}</strong>
                                 @enderror

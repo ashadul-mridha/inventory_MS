@@ -44,7 +44,9 @@
                                                 <td>{{ $customer->name }}</td>
                                                 <td>{{ $customer->phone }}</td>
                                                 <td>{{ $customer->address }}</td>
-                                                <td><img src="{{ asset($customer->photo) }}" style="height: 80px; width: 80px;" alt="employee image"></td>
+                                                <td>
+                                                    <img src="{{asset('public/Image/Customer/Photo')}}/{{ $customer->photo }}" alt="Customer Image" width="80" height="80">
+                                                </td>
                                                 <td>{{ $customer->shopname }}</td>
                                                 <td>
                                                     <a href="/customers/{{ $customer->id }}/edit" class="btn btn-sm btn-info"> Edit </a>

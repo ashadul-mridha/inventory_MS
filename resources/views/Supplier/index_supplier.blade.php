@@ -44,12 +44,11 @@
                                                 <td>{{ $supplier->name }}</td>
                                                 <td>{{ $supplier->phone }}</td>
                                                 <td>{{ $supplier->address }}</td>
-                                                <td><img src="{{ asset($supplier->photo) }}" style="height: 80px; width: 80px;" alt="supplier image"></td>
+                                                <td>
+                                                    <img src="{{asset('public/Image/Supplier/Photo')}}/{{ $supplier->photo }}" alt="Supplier Image" width="80" height="80">
+                                                </td>
                                                 <td>{{ $supplier->shop }}</td>
                                                 <td>
-                                                    {{-- /customers/{{ $customer->id }}/edit
-                                                    /customer-delete/{{ $customer->id }}
-                                                    /customers/{{ $customer->id }} --}}
                                                     <a href="/suppliers/{{ $supplier->id }}/edit" class="btn btn-sm btn-info"> Edit </a>
                                                     <a href="/supplier-delete/{{ $supplier->id }}" class="btn btn-sm btn-danger"> Delete </a>
                                                     <a href=" /suppliers/{{ $supplier->id }}" class="btn btn-sm btn-primary"> View </a>

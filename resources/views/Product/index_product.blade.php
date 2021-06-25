@@ -57,13 +57,10 @@
                                                 <td>{{ $row->product_name }}</td>
                                                 <td>{{ $row->product_code }}</td>
                                                 <td>{{ $row->selling_price }}</td>
-                                                <td><img src="{{ asset($row->product_image) }}" style="height: 80px; width: 80px;" alt="Product image"></td>
+                                                <td><img src="{{ asset('Public/Image/Product/Photo') }}/{{$row->product_image}}" style="height: 80px; width: 80px;" alt="Product image"></td>
                                                 <td>{{ $row->product_garage }}</td>
                                                 <td>{{ $row->product_route }}</td>
                                                 <td>
-                                                    {{-- /customers/{{ $customer->id }}/edit
-                                                    /customer-delete/{{ $customer->id }}
-                                                    /customers/{{ $customer->id }} --}}
                                                     <a href="/products/{{ $row->id }}/edit" class="btn btn-sm btn-info"> Edit </a>
                                                     <a href="/product-delete/{{ $row->id }}" class="btn btn-sm btn-danger"> Delete </a>
                                                     <a href="/products/{{ $row->id }}" class="btn btn-sm btn-primary"> View </a>

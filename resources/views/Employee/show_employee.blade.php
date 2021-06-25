@@ -59,8 +59,8 @@
                                 <p> {{ $employee->nid_no }} </p>
                             </div>
                             <div class="form-group">
-                                <label for="photo">Photo</label>
-                                <p> {{ $employee->photo }} </p>
+                                <label for="photo">Image</label>
+                                <img src="{{asset('public/Image/Employee/Photo')}}/{{ $employee->photo }}" alt="Employee Image" width="500" height="400">
                             </div>
 
                     </div><!-- panel-body -->

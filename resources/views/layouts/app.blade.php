@@ -178,6 +178,10 @@
                             <li>
                                 <a href="{{ route('home') }}" class="waves-effect  {{ request()->is('home') ? 'active' : ' ' }}"><i class="md md-home"></i><span> Dashboard </span></a>
                             </li>
+                            {{-- POS --}}
+                            <li>
+                                <a href="{{ route('home') }}" class="waves-effect  {{ request()->is('pos') ? 'active' : ' ' }}"><i class="md md-home"></i><span> POS </span></a>
+                            </li>
                             {{-- Dashboard In Employee --}}
                             <li class="has_sub">
                                 <a href="#" class="waves-effect {{ request()->is('employees/*') ? 'active' : ' ' }} "><i class="fa fa-users"></i><span> Employee </span><span class="pull-right"><i class="md md-add"></i></span></a>
@@ -197,7 +201,7 @@
                             </li>
                             {{-- Dashboard In Supplier --}}
                             <li class="has_sub">
-                                <a href="#" class="waves-effect "><i class="fa fa-users"></i><span> Supplier </span><span class="pull-right"><i class="md md-add"></i></span></a>
+                                <a href="#" class="waves-effect {{ request()->is('suppliers/*') ? 'active' : ' ' }}"><i class="fa fa-users"></i><span> Supplier </span><span class="pull-right"><i class="md md-add"></i></span></a>
                                 <ul class="list-unstyled">
                                     <li><a href="{{ route('supplier.create')}}">Add Supplier</a></li>
                                     <li><a href="{{ route('supplier.index')}}">All Supplier</a></li>
@@ -205,7 +209,7 @@
                             </li>
                             {{-- Dashboard In Salary --}}
                             <li class="has_sub">
-                                <a href="#" class="waves-effect "><i class="fa fa-users"></i><span> Salary </span><span class="pull-right"><i class="md md-add"></i></span></a>
+                                <a href="#" class="waves-effect {{ request()->is('salaries/*') ? 'active' : ' ' }}"><i class="fa fa-users"></i><span> Salary </span><span class="pull-right"><i class="md md-add"></i></span></a>
                                 <ul class="list-unstyled">
                                     <li><a href="{{ route('salary.create')}}">Add Advanced Salary</a></li>
                                     <li><a href="{{ route('salary.index')}}">All Advanced Salary</a></li>
@@ -215,7 +219,7 @@
                             </li>
                             {{-- Dashboard In Category --}}
                             <li class="has_sub">
-                                <a href="#" class="waves-effect "><i class="fa fa-users"></i><span> Category </span><span class="pull-right"><i class="md md-add"></i></span></a>
+                                <a href="#" class="waves-effect {{ request()->is('category/*') ? 'active' : ' ' }}"><i class="fa fa-users"></i><span> Category </span><span class="pull-right"><i class="md md-add"></i></span></a>
                                 <ul class="list-unstyled">
                                     <li><a href="{{ route('category.create')}}">Add Category</a></li>
                                     <li><a href="{{ route('category.index')}}">All Category</a></li>
@@ -223,10 +227,35 @@
                             </li>
                             {{-- Dashboard In Product --}}
                             <li class="has_sub">
-                                <a href="#" class="waves-effect "><i class="fa fa-users"></i><span> Products </span><span class="pull-right"><i class="md md-add"></i></span></a>
+                                <a href="#" class="waves-effect {{ request()->is('products/*') ? 'active' : ' ' }}"><i class="fa fa-users"></i><span> Products </span><span class="pull-right"><i class="md md-add"></i></span></a>
                                 <ul class="list-unstyled">
                                     <li><a href="{{ route('product.create')}}">Add Product</a></li>
                                     <li><a href="{{ route('product.index')}}">All Product</a></li>
+                                </ul>
+                            </li>
+                            {{-- Dashboard In Expense --}}
+                            <li class="has_sub">
+                                <a href="#" class="waves-effect {{ request()->is('expense/*') ? 'active' : ' ' }}"><i class="fa fa-users"></i><span> Expense </span><span class="pull-right"><i class="md md-add"></i></span></a>
+                                <ul class="list-unstyled">
+                                    <li><a href="{{ route('expense.create')}}">Add Expense</a></li>
+                                    {{-- <li><a href="{{ route('expense.index')}}">All Expense</a></li> --}}
+                                    <li><a href="{{ route('today.expense')}}">Today Expense</a></li>
+                                    <li><a href="{{ route('month.expense')}}">This Month Expense</a></li>
+                                    <li><a href="{{ route('year.expense')}}">This Year Expense</a></li>
+                                </ul>
+                            </li>
+                            {{-- Dashboard In Attendence --}}
+                            <li class="has_sub">
+                                <a href="#" class="waves-effect {{ request()->is('salaries/*') ? 'active' : ' ' }}"><i class="fa fa-users"></i><span> Attendence </span><span class="pull-right"><i class="md md-add"></i></span></a>
+                                <ul class="list-unstyled">
+                                    <li><a href="$">Add Expense</a></li>
+                                </ul>
+                            </li>
+                            {{-- Dashboard In Sales Report --}}
+                            <li class="has_sub">
+                                <a href="#" class="waves-effect {{ request()->is('salaries/*') ? 'active' : ' ' }}"><i class="fa fa-users"></i><span> Sales Report </span><span class="pull-right"><i class="md md-add"></i></span></a>
+                                <ul class="list-unstyled">
+                                    <li><a href="#">Add Expense</a></li>
                                 </ul>
                             </li>
                         </ul>

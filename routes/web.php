@@ -10,6 +10,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+
 // Employee Controller are here
 //create Employee
 Route::get('/employees/create','App\Http\Controllers\EmployeeController@create')->name('employee.create');
@@ -24,7 +25,7 @@ Route::get('/employee-delete/{employee_id}','App\Http\Controllers\EmployeeContro
 //edit single employee details
 Route::get('/employees/{employee_id}/edit','App\Http\Controllers\EmployeeController@edit')->name('employee.edit');
 //Update single employee details
-Route::post('/employees/{employee_id}','App\Http\Controllers\EmployeeController@update')->name('employee.update');
+Route::post('/employees/update','App\Http\Controllers\EmployeeController@update')->name('employee.update');
 
 // Customer Controller are here
 //create Employee
@@ -40,7 +41,7 @@ Route::get('/customer-delete/{customer_id}','App\Http\Controllers\CustomerContro
 //edit single employee details
 Route::get('/customers/{customer_id}/edit','App\Http\Controllers\CustomerController@edit')->name('customer.edit');
 //Update single employee details
-Route::post('/customers/{customer_id}','App\Http\Controllers\CustomerController@update')->name('customer.update');
+Route::post('/cutomers/update','App\Http\Controllers\CustomerController@update')->name('customer.update.ashy');
 
 // Supplier Controller are here
 //create Supplier
@@ -56,7 +57,7 @@ Route::get('/supplier-delete/{supplier_id}','App\Http\Controllers\SupplierContro
 // edit single Supplier details
 Route::get('/suppliers/{supplier_id}/edit','App\Http\Controllers\SupplierController@edit')->name('supplier.edit');
 //Update single Supplier details
-Route::post('/suppliers/{supplier_id}','App\Http\Controllers\SupplierController@update')->name('supplier.update');
+Route::post('/suppliers/update','App\Http\Controllers\SupplierController@update')->name('supplier.update');
 
 // Salary Controller are here
 //create Salary
@@ -98,6 +99,46 @@ Route::get('/product-delete/{id}','App\Http\Controllers\ProductController@destro
 Route::get('/products/{id}/edit','App\Http\Controllers\ProductController@edit')->name('product.edit');
 //Update single Product details
 Route::post('/products/update','App\Http\Controllers\ProductController@update')->name('product.update');
-Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Expense Controller are here
+//create Expense
+Route::get('/expense/create','App\Http\Controllers\ExpenseController@create')->name('expense.create');
+// store Expense
+Route::post('/expense','App\Http\Controllers\ExpenseController@store')->name('expense.store');
+// show all  Expense
+Route::get('/expense/all','App\Http\Controllers\ExpenseController@index')->name('expense.index');
+// Today Expense
+Route::get('/today/expense','App\Http\Controllers\ExpenseController@today')->name('today.expense');
+// edit Today expense details
+Route::get('/today/expense/edit/{id}','App\Http\Controllers\ExpenseController@todayedit')->name('todayexpense.edit');
+// Update today Expense
+Route::post('/today/expense/update','App\Http\Controllers\ExpenseController@updatetoday')->name('todayexpense.update');
+// edit Today expense details
+Route::get('/today/expense/delete/{id}','App\Http\Controllers\ExpenseController@todaydelete')->name('todayexpense.delete');
+// This Month Expense
+Route::get('/month/expense','App\Http\Controllers\ExpenseController@month')->name('month.expense');
+// This year Expense
+Route::get('/year/expense','App\Http\Controllers\ExpenseController@year')->name('year.expense');
+// //show single Product details
+// Route::get('/products/{id}','App\Http\Controllers\ProductController@show')->name('product.show');
+// //delete single Product details
+// Route::get('/product-delete/{id}','App\Http\Controllers\ProductController@destroy')->name('product.destroy');
+// // edit single Product details
+// Route::get('/products/{id}/edit','App\Http\Controllers\ProductController@edit')->name('product.edit');
+// //Update single Product details
+// Route::post('/products/update','App\Http\Controllers\ProductController@update')->name('product.update');
+
+
+//Monthly Expensive route here
+Route::get('/january/month/expense','App\Http\Controllers\ExpenseController@january')->name('january.expense');
+Route::get('/february/month/expense','App\Http\Controllers\ExpenseController@february')->name('february.expense');
+Route::get('/march/month/expense','App\Http\Controllers\ExpenseController@march')->name('march.expense');
+Route::get('/april/month/expense','App\Http\Controllers\ExpenseController@april')->name('april.expense');
+Route::get('/may/month/expense','App\Http\Controllers\ExpenseController@may')->name('may.expense');
+Route::get('/june/month/expense','App\Http\Controllers\ExpenseController@june')->name('june.expense');
+Route::get('/july/month/expense','App\Http\Controllers\ExpenseController@july')->name('july.expense');
+Route::get('/august/month/expense','App\Http\Controllers\ExpenseController@august')->name('august.expense');
+Route::get('/september/month/expense','App\Http\Controllers\ExpenseController@september')->name('september.expense');
+Route::get('/october/month/expense','App\Http\Controllers\ExpenseController@october')->name('october.expense');
+Route::get('/november/month/expense','App\Http\Controllers\ExpenseController@november')->name('november.expense');
+Route::get('/december/month/expense','App\Http\Controllers\ExpenseController@december')->name('december.expense');

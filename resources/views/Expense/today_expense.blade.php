@@ -6,11 +6,16 @@
         <!-- Page-Title -->
         <div class="row">
             <div class="col-sm-12">
-                <h4 class="pull-left page-title">All Employee</h4>
+                <h4 class="pull-left page-title">{{ date('d/m/y')}} Date Expensive</h4>
                 <ol class="breadcrumb pull-right">
                     <li><a href="{{ route('home') }}">Dashboard</a></li>
-                    <li ><a href="{{ route('employees.index') }}">All Employees</a></li>
+                    <li ><a href="{{ route('expense.index') }}">All Expensive</a></li>
                 </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <h4 class="text-center text-danger">Total Expense: {{ $today_expense }}</h4>
             </div>
         </div>
 
@@ -20,7 +25,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">Datatable</h3>
-                        <a href="{{ route('employee.create') }}" class="btn btn-primary pull-right"> Add Employee</a>
+                        <a href="{{ route('expense.create') }}" class="btn btn-primary pull-right"> Add Expense</a>
                     </div>
                     <div class="panel-body">
                         <div class="row">
@@ -28,30 +33,21 @@
                                 <table id="datatable" class="table table-striped table-bordered">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Phone</th>
-                                            <th>Address</th>
-                                            <th>Image</th>
-                                            <th>Salary</th>
+                                            <th>Details</th>
+                                            <th>Amount</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
 
                              
                                     <tbody>
-                                        @foreach ($employees as $employee)
+                                        @foreach ($expense as $row)
                                             <tr>
-                                                <td>{{ $employee->name }}</td>
-                                                <td>{{ $employee->phone }}</td>
-                                                <td>{{ $employee->address }}</td>
+                                                <td>{{ $row->details }}</td>
+                                                <td>{{ $row->amount }}</td>
                                                 <td>
-                                                    <img src="{{asset('public/Image/Employee/Photo')}}/{{ $employee->photo }}" alt="Employee Image" width="80" height="80">
-                                                </td>
-                                                <td>{{ $employee->salary }}</td>
-                                                <td>
-                                                    <a href="/employees/{{ $employee->id }}/edit" class="btn btn-sm btn-info"> Edit</a>
-                                                    <a href="/employee-delete/{{ $employee->id }}" class="btn btn-sm btn-danger"> Delete</a>
-                                                    <a href="/employees/{{ $employee->id }}" class="btn btn-sm btn-primary"> View</a>
+                                                    <a href="{{ route('todayexpense.edit',$row->id)}}" class="btn btn-sm btn-info"> Edit</a>
+                                                    <a href="{{ route('todayexpense.delete',$row->id)}}" class="btn btn-sm btn-danger"> Delete</a>
                                                 </td>
                                             </tr>
                                         @endforeach

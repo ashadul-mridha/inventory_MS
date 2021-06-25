@@ -46,7 +46,7 @@
                                                 <td>{{ $row->name }}</td>
                                                 <td><img src="{{ asset($row->photo) }}" style="height: 80px; width: 80px;" alt="supplier image"></td>
                                                 <td>{{ $row->salary }}</td>
-                                                <td><span class="badge badge-success">{{ date('F',strtotime('-1 months')) }}</span></td>
+                                                <td><span class="badge badge-success">{{ date('F',strtotime('-2 months')) }}</span></td>
                                                 {{-- <td>{{ $row->advanced_salary }}</td> --}}
                                                 <td>
                                                     <a href=" # " class="btn btn-sm btn-primary"> Pay Salary </a>

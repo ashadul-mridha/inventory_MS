@@ -64,7 +64,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="photo">Photo</label>
-                                <p> {{ $supplier->photo }} </p>
+                                <img src="{{asset('public/Image/Supplier/Photo')}}/{{ $supplier->photo }}" alt="Supplier Image" width="500" height="400">
                             </div>
 
                     </div><!-- panel-body -->

@@ -21,11 +21,13 @@
             <div class="col-md-2"></div>
             <div class="col-md-8">
                 <div class="panel panel-default">
-                    <div class="panel-heading"><h3 class="panel-title">Add Supplier Details</h3></div>
+                    <div class="panel-heading"><h3 class="panel-title">Update Supplier Details</h3></div>
                     <a href="{{ route('supplier.index') }}" class="btn btn-primary pull-right"> All Supplier</a>
                     <div class="panel-body">
-                        <form role="form" method="POST" action="/suppliers/{{ $supplier->id }}" enctype="multipart/form-data">
+                        <form role="form" method="POST" action="{{ route('supplier.update') }}" enctype="multipart/form-data">
                             @csrf
+                            
+                            <input type="hidden" value="{{ $supplier->id }}" name="id" class="form-control" >
                             <div class="form-group">
                                 <label for="name">Supplier Name</label>
                                 <input type="text" value="{{ $supplier->name }}" name="name" class="form-control" id="name" placeholder="Enter Your Full Name">
@@ -104,8 +106,12 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="photo">Photo</label>
-                                <input type="text" value="{{ $supplier->photo }}" name="photo" class="form-control" id="photo" >
+                                <label for="photo">Old Photo</label>
+                                <img src="{{asset('public/Image/Supplier/Photo')}}/{{ $supplier->photo }}" alt="Supplier Image" width="500" height="400">
+                            </div>
+                            <div class="form-group">
+                                <label for="photo">Upload New Photo</label>
+                                <input type="file" name="photo" class="form-control" id="photo" >
                                 @error('photo')
                                     <strong class="alert alert-danger">{{ $message }}</strong>
                                 @enderror

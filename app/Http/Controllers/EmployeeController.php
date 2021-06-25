@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Employee;
+use DB;
 
 class EmployeeController extends Controller
 {
@@ -42,10 +43,14 @@ class EmployeeController extends Controller
         $employee->city = $request->city;
         $employee->nid_no = $request->nid_no;
         //photo store
-        // $extension = $request->photo->extension();
-        // $photo_name = $employee->name.".".$extension;
-        // $request->photo->storeAs('employee', $photo_name);
-        // $employee->photo = $photo_name;
+        if ($request->hasFile('photo')) {
+            $photo = $request->file('photo');
+            $photo_name = date("Ymdhis") . '.' . $photo->getClientOriginalExtension();
+            $photo->move(public_path('Public/Image/Employee/Photo') , $photo_name);
+        }
+	
+	
+        $employee->photo = $photo_name;
 
         $employee->save();
         return redirect()->route('employees.index');
@@ -72,11 +77,9 @@ class EmployeeController extends Controller
         return view('Employee.edit_employee',compact('employee'));
     }
     //update single employee
-    public function update(\App\Models\Employee   $employee_id){
-        
-        //Employee::findorfail($employee_id);
+    public function update(Request $request){
 
-        $data= request()->validate([
+        $request->validate([
             'name' => 'required',
             'email' => 'email|required',
             'phone' => 'required|numeric',
@@ -87,26 +90,42 @@ class EmployeeController extends Controller
 
         ]);
 
-        $employee_id->update($data);
+        $id = $request->id;
 
-        // $employee = new Employee;
 
-        // $employee->name = $request->name;
-        // $employee->email = $request->email;
-        // $employee->phone = $request->phone;
-        // $employee->address = $request->address;
-        // $employee->exprience = $request->exprience;
-        // $employee->salary = $request->salary;
-        // $employee->vacation = $request->vacation;
-        // $employee->city = $request->city;
-        // $employee->nid_no = $request->nid_no;
-        // //photo store
-        // $extension = $request->photo->extension();
-        // $photo_name = $employee->name.".".$extension;
-        // $request->photo->storeAs('employee', $photo_name);
-        // $employee->photo = $photo_name;
+        $employee = Employee::findorfail($id);
 
-        // $employee->save();
+        $employee->name = $request->name;
+        $employee->email = $request->email;
+        $employee->phone = $request->phone;
+        $employee->address = $request->address;
+        $employee->exprience = $request->exprience;
+        $employee->salary = $request->salary;
+        $employee->vacation = $request->vacation;
+        $employee->city = $request->city;
+        $employee->nid_no = $request->nid_no;
+        //photo store
+        if ($request->hasFile('photo')) {
+
+            $m = DB::table('employees')->where('id', $id)->first();
+            $old_imge = $m->photo;
+            if(file_exists($old_imge)){
+                unlink(public_path('Public/Image/Employee/Photo').'/'.$employee->photo);
+            }
+    
+            $photo = $request->file('photo');
+            $photo_name = date("Ymdhis") . '.' . $photo->getClientOriginalExtension();
+            $photo->move(public_path('public/Image/Employee/Photo') , $photo_name);
+            $employee->photo = $photo_name;
+    
+        }else{
+                $m = DB::table('employees')->where('id', $id)->first();
+                $old_imge = $m->photo;
+                $employee->photo = $old_imge;
+    
+            }
+
+        $employee->save();
         return redirect()->route('employees.index');
 
     }

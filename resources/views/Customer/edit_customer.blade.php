@@ -23,8 +23,10 @@
                 <div class="panel panel-default">
                     <div class="panel-heading"><h3 class="panel-title">Edit Customer Details</h3></div>
                     <div class="panel-body">
-                        <form role="form" method="post" action="/customers/{{$customer->id}}" enctype="multipart/form-data">
+                        <form role="form" method="POST" action="{{ route('customer.update.ashy') }}" enctype="multipart/form-data">
                             @csrf
+                            
+                            <input type="hidden" value="{{ $customer->id }}" name="id" class="form-control" >
                             <div class="form-group">
                                 <label for="name">Name</label>
                                 <input type="text" value="{{ $customer->name }}" name="name" class="form-control" id="name" placeholder="Enter Your Full Name">
@@ -96,8 +98,12 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="photo">Photo</label>
-                                <input type="text" value="{{ $customer->photo }}" name="photo" class="form-control" id="photo" >
+                                <label for="photo">Old Photo</label>
+                                <img src="{{asset('public/Image/Customer/Photo')}}/{{ $customer->photo }}" alt="Customer Image" width="500" height="400">
+                            </div>
+                            <div class="form-group">
+                                <label for="photo">Upload New Photo</label>
+                                <input type="file" name="photo" class="form-control" id="photo" >
                                 @error('photo')
                                     <strong class="alert alert-danger">{{ $message }}</strong>
                                 @enderror

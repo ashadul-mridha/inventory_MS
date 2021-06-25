@@ -39,10 +39,15 @@ class ProductController extends Controller
         $data->buying_price = $request->buying_price;
         $data->selling_price = $request->selling_price;
         //photo store
-        $extension = $request->Product_image->extension();
-        $photo_name = $data->product_name.".".$extension;
-        $request->Product_image->storeAs('product', $photo_name);
-        $data->Product_image = $photo_name;
+        //photo store
+        if ($request->hasFile('Product_image')) {
+            $photo = $request->file('Product_image');
+            $photo_name = date("Ymdhis") . '.' . $photo->getClientOriginalExtension();
+            $photo->move(public_path('Public/Image/Product/Photo') , $photo_name);
+        }
+	
+	
+        $data->product_image = $photo_name;
 
         $data->save();
         return redirect()->back()->with('success','Product Add Successful');
